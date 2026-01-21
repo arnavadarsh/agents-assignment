@@ -5,14 +5,16 @@ Simplified test script that imports only the handler module directly
 import sys
 import os
 
-# Add the livekit-agents directory to the path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'livekit-agents'))
-
-# Import just the handler module
-from livekit.agents.voice.interruption_handler import (
-    IntelligentInterruptionHandler,
-    InterruptionConfig,
+# Read and execute the handler file directly to avoid dependency issues
+handler_path = os.path.join(
+    os.path.dirname(__file__), 
+    'livekit-agents/livekit/agents/voice/interruption_handler.py'
 )
+
+with open(handler_path, 'r') as f:
+    handler_code = f.read()
+
+exec(handler_code)
 
 
 def print_decision(test_name: str, decision, user_input: str, agent_speaking: bool):

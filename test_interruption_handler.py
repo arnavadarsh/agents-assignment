@@ -6,10 +6,18 @@ functionality. It tests all scenarios required by the assignment.
 """
 
 import logging
-from livekit.agents.voice import (
-    IntelligentInterruptionHandler,
-    InterruptionConfig,
+import os
+
+# Read and execute the handler file directly to avoid dependency issues
+handler_path = os.path.join(
+    os.path.dirname(__file__), 
+    'livekit-agents/livekit/agents/voice/interruption_handler.py'
 )
+
+with open(handler_path, 'r') as f:
+    handler_code = f.read()
+
+exec(handler_code)
 
 # Configure logging
 logging.basicConfig(

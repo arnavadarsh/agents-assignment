@@ -65,6 +65,14 @@ class InterruptionDecision:
     matched_ignore_words: List[str] = field(default_factory=list)
     matched_interrupt_words: List[str] = field(default_factory=list)
     is_pure_backchanneling: bool = False
+    
+    @property
+    def matched_words(self) -> List[str]:
+        """
+        Combined list of all matched words (for backwards compatibility).
+        Returns ignore words + interrupt words.
+        """
+        return self.matched_ignore_words + self.matched_interrupt_words
 
 
 class IntelligentInterruptionHandler:
